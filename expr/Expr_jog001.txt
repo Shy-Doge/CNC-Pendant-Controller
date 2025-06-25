@@ -1,0 +1,2 @@
+#jogstep001
+_jog_step=0.01
