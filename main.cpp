@@ -123,16 +123,6 @@ void sendAxisSpeed() {
   }
 }
 
-void sendKeyBurst(uint8_t key, int count, const char* debugLabel) {
-  for (int i = 0; i < count; i++) {
-    Keyboard.press(key);
-    delay(1);
-    Keyboard.release(key);
-  }
-  // Serial.println(debugLabel);
-  delay(1); // Short delay after burst to avoid flooding
-}
-
 void loop() {
   // Emergency button state check
   bool currentEmergencyState = digitalRead(emergencyButton);
@@ -198,19 +188,43 @@ void loop() {
   if (totalSteps > 0) {
     if (diffCounter > 0) {
       if (digitalRead(axisX) == LOW) {
-        sendKeyBurst(244, totalSteps, "→ F17");  // F17
+        for (int i = 0; i < totalSteps; i++) {
+          Keyboard.press(244);  // F17
+          delay(1);
+          Keyboard.release(244);
+        }
       } else if (digitalRead(axisY) == LOW) {
-        sendKeyBurst(245, totalSteps, "↑ F18");  // F18
+        for (int i = 0; i < totalSteps; i++) {
+          Keyboard.press(245);  // F18
+          delay(1);
+          Keyboard.release(245);
+        }
       } else if (digitalRead(axisZ) == LOW) {
-        sendKeyBurst(247, totalSteps, "Z+ F20");  // F20
+        for (int i = 0; i < totalSteps; i++) {
+          Keyboard.press(247);  // F20
+          delay(1);
+          Keyboard.release(247);
+        }
       }
     } else {
       if (digitalRead(axisX) == LOW) {
-        sendKeyBurst(243, totalSteps, "← F16");  // F16
+        for (int i = 0; i < totalSteps; i++) {
+          Keyboard.press(243);  // F16
+          delay(1);
+          Keyboard.release(243);
+        }
       } else if (digitalRead(axisY) == LOW) {
-        sendKeyBurst(246, totalSteps, "↓ F19");  // F19
+        for (int i = 0; i < totalSteps; i++) {
+          Keyboard.press(246);  // F19
+          delay(1);
+          Keyboard.release(246);
+        }
       } else if (digitalRead(axisZ) == LOW) {
-        sendKeyBurst(248, totalSteps, "Z- F21");  // F21
+        for (int i = 0; i < totalSteps; i++) {
+          Keyboard.press(248);  // F21
+          delay(1);
+          Keyboard.release(248);
+        }
       }
     }
   }
